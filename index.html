@@ -311,18 +311,18 @@
         
     </div>
 
-    <script>
-        // Автоматическое воспроизведение видео при наведении
-        document.querySelectorAll('.card').forEach(card => {
-            const video = card.querySelector('.activity-video');
-            
-            card.addEventListener('mouseenter', function() {
-                video.play();
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                video.pause();
-                video.currentTime = 0; // Сбрасываем видео в начало
-            });
+  <script>
+    // Автовоспроизведение видео при наведении
+    document.querySelectorAll('.card').forEach(card => {
+        const video = card.querySelector('.activity-video');
+        
+        card.addEventListener('mouseenter', function() {
+            video.play();
         });
-    </script>
+        
+        card.addEventListener('mouseleave', function() {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+</script>
