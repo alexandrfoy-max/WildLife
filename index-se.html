@@ -1,1 +1,653 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildlife Explorers Tenerife | Familjeäventyr Läger</title>
+    <style>
+        /* Samma CSS som den engelska versionen */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; color: #333;
+        }
+        
+        .page-video-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .main-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero { 
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+        }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .btn {
+            display: inline-block;
+            background: #e67e22;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn:hover { background: #cf7116; }
 
+        .video-card {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.5s ease;
+        }
+        
+        .activity-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .card:hover .activity-video {
+            opacity: 1;
+        }
+        
+        .card:hover .preview-image {
+            opacity: 0;
+        }
+
+        .intro, .programs, .info, .contact { 
+            background: rgba(255, 255, 255, 0.80);
+            padding: 60px 20px;
+        }
+        
+        .faq { 
+            background: rgba(44, 62, 80, 0.80);
+            color: white;
+            padding: 60px 20px;
+        }
+
+        @media (max-width: 768px) {
+            .page-video-bg {
+                display: none;
+            }
+            .intro, .programs, .info, .contact { 
+                background: white;
+            }
+            .faq { 
+                background: #2c3e50;
+            }
+            .hero {
+                background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background_foto.jpg') center/cover;
+            }
+            .hero-content {
+                background: none;
+            }
+            
+            .card:hover .activity-video {
+                opacity: 0;
+            }
+            .card:hover .preview-image {
+                opacity: 1;
+            }
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(230, 126, 34, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #e67e22;
+        }
+        
+        .pricing-card h3 {
+            color: #e67e22;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .price-main {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e67e22;
+            margin: 15px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .contact-info {
+            text-align: center;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-method:hover {
+            transform: translateX(10px);
+            background: #e9ecef;
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e67e22;
+            color: white;
+            border-radius: 50%;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .faq-item {
+            background: white;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: #f8f9fa;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #2c3e50;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
+        .intro { text-align: center; }
+        .intro h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
+        .programs {  }
+        .programs h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: #2c3e50; }
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card-content { padding: 25px; }
+        .card h3 { color: #2c3e50; margin-bottom: 10px; }
+        .card ul { margin: 15px 0; padding-left: 20px; }
+        .card li { margin-bottom: 8px; }
+        .info h2 { font-size: 2.2rem; margin-bottom: 30px; color: #2c3e50; }
+        .included { margin: 30px 0; }
+        .included ul { list-style: none; }
+        .included li { margin-bottom: 10px; font-size: 1.1rem; }
+        .contact h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; text-align: center; }
+        footer { background: #34495e; color: #ecf0f1; text-align: center; padding: 20px; }
+
+        /* Language switcher */
+        .language-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .lang-btn {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .lang-btn:hover {
+            background: #e67e22;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Video Background -->
+    <video class="page-video-bg" autoplay muted loop playsinline>
+        <source src="banner-video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <a href="index.html" class="lang-btn">English</a>
+        <a href="index-se.html" class="lang-btn" style="background: #e67e22; color: white;">Svenska</a>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="container">
+                    <h1>Wildlife Explorers Tenerife</h1>
+                    <p>Berg, Öknar, Kreativitet & Äventyr för Barn & Familjer!</p>
+                    <p>Upptäck den riktiga Teneriffa, bortom turistområdena.</p>
+                    <a href="https://wa.me/358466124869?text=Hej! Jag vill boka Wildlife Explorers äventyr på Teneriffa" class="btn">Boka Ditt Äventyr Nu!</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Intro Section -->
+        <section class="intro">
+            <div class="container">
+                <h2>Äventyr Vid Foten Av En Vulkan</h2>
+                <p>Upptäck Teneriffas vilda sida från vår unika bas vid Calle Laderas del Mojón 27, belägen vid den majestätiska Montaña del Mojón-vulkanen i Chayofa. Bara minuter ovanför turistcentra men ändå en helt annan värld. Vi erbjuder interaktiva pedagogiska äventyr där både barn och föräldrar får uppleva autentisk kanarisk natur, kultur och traditioner.</p>
+                <p>Varje äventyr inkluderar professionell guidning, alla material och kanarisk lunch.</p>
+            </div>
+        </section>
+
+        <!-- Programs Section -->
+        <section id="programs" class="programs">
+            <div class="container">
+                <h2>Välj Ditt Äventyr</h2>
+                <div class="program-cards">
+
+                    <!-- Program 1: Mountains & Volcanoes -->
+                    <div class="card">
+                        <div class="video-card">
+                            <img src="mountain-activity.jpg" class="preview-image" alt="Bergsäventyr">
+                            <video class="activity-video" muted loop playsinline>
+                                <source src="mountain-activity-video.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Vulkanutforskare: Bergens Hemligheter</h3>
+                            <p>Följ med på en oförglömlig resa till hjärtat av Teneriffas vulkaniska landskap! Unga upptäcktsresande blir geologidetektiver som avslöjar de eldiga hemligheterna hos öns sovande jättar. Vi undersöker olika typer av vulkanbergarter, lär oss hur Teide-vulkanen formade ön och upptäcker varför vissa berg står starka medan andra smulas sönder till sand. Vi kommer också att skapa traditionellt Guanche-hantverk - den lokala kulturen på Teneriffa.</p>
+                            <ul>
+                                <li>🏔️ <strong>Guidad bergsexpedition</strong> med äkta vulkanstensupptäckter</li>
+                                <li>📚 Interaktiva lektioner om öns geologi och kanarisk folklore</li>
+                                <li>🎨 <strong>Traditionellt hantverksworkshop</strong> skapar Guanche-artefakter</li>
+                                <li>🔍 Praktiska experiment med olika bergarter</li>
+                                <li>🍽️ <strong>Autentisk kanarisk lunch</strong> ingår</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Program 2: Deserts -->
+                    <div class="card">
+                        <div class="video-card">
+                            <img src="desert-activity.jpg" class="preview-image" alt="Ökenäventyr">
+                            <video class="activity-video" muted loop playsinline>
+                                <source src="desert-activity-video.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Ökenöverlevare: Liv i Arida Land</h3>
+                            <p>Upptäck Teneriffas unika ökenekosystems dolda underverk! I detta immersiva äventyr lär sig barn hur växter och djur inte bara överlever utan frodas i till synes tuffa förhållanden. Vi utforskar en kaktusträdgård, identifierar olika suckulenta arter och avslöjar de hemliga vattenlagringstekniker som gör att liv kan blomstra i öknen. Efteråt skapar barn traditionella Guanche-hantverk och smakar uppfriskande kaktusjuice, för nu vet de... hur man överlever i öknen.</p>
+                            <ul>
+                                <li>🌵 <strong>Ökenexpedition</strong> genom unik kaktus- och suckulentträdgård</li>
+                                <li>💧 Lär dig hur växter och djur överlever extrema förhållanden</li>
+                                <li>🎨 <strong>Kreativ workshop</strong> inspirerad av forntida Guanche-hantverk</li>
+                                <li>🌿 Upptäck läkeväxter som användes av traditionella kanariska healers</li>
+                                <li>🍽️ <strong>Autentisk kanarisk lunch</strong> ingår</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Info Section -->
+        <section class="info">
+            <div class="container">
+                <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Priser</strong></p>
+                
+                <!-- Pricing -->
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>1 Barn + 1 Vuxen</h3>
+                        <div class="price-main">79€</div>
+                        <p>Perfekt för förälder-barn-bondning</p>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>1 Barn + 2 Vuxna</h3>
+                        <div class="price-main">99€</div>
+                        <p>Utmärkt för familjeäventyr</p>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>2 Barn + 2 Vuxna</h3>
+                        <div class="price-main">139€</div>
+                        <p>Bästa valet för familjer</p>
+                    </div>
+                </div>
+
+                <div class="included">
+                    <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Varje äventyr inkluderar:</strong></p>
+                    <ul>
+                        <li>👩‍🏫 Expert tvåspråkig pedagog och guide</li>
+                        <li>🎨 Alla material för kreativa workshop</li>
+                        <li>🍽️ Autentisk kanarisk lunch</li>
+                        <li>📷 Minnesvärda foton från ditt äventyr</li>
+                    </ul>
+                </div>
+
+                <!-- Extra Services -->
+                <div class="included" style="margin-top: 40px;">
+                    <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Extratjänster:</strong></p>
+                    <ul>
+                        <li>🚗 <strong>Transfer</strong> (10€ inom 15km från Los Cristianos)</li>
+                        <li>👕🎒 <strong>Wildlife Explorers Tenerife presentpaket</strong> - T-shirt + väska (20€)</li>
+                    </ul>
+                </div>
+
+                <!-- Booking CTA -->
+                <div style="text-align: center; margin-top: 50px; padding: 40px; background: rgba(255,255,255,0.1); border-radius: 15px;">
+                    <h3 style="color: #e67e22; margin-bottom: 20px;">Redo att Boka Ditt Äventyr?</h3>
+                    <p style="margin-bottom: 25px; font-size: 1.1rem;">Kontakta oss via WhatsApp för snabb bokning och omedelbara svar på dina frågor!</p>
+                    <a href="https://wa.me/358466124869?text=Hej! Jag vill boka Wildlife Explorers äventyr på Teneriffa" class="btn" style="font-size: 1.2rem; padding: 15px 30px;">
+                        📱 Boka via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <div class="container">
+                <h2>Kontakta Oss</h2>
+                <p style="text-align: center; margin-bottom: 40px;">Har du frågor? Vi är här för att hjälpa!</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="contact-icon">📱</div>
+                                <div>
+                                    <h4>WhatsApp Bokning</h4>
+                                    <p>Snabba svar & omedelbar bokning</p>
+                                    <a href="https://wa.me/358466124869?text=Hej! Jag vill boka Wildlife Explorers äventyr på Teneriffa" class="btn" style="margin-top: 10px; display: inline-block;">
+                                        Skicka Meddelande
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="contact-icon">📧</div>
+                                <div>
+                                    <h4>E-post</h4>
+                                    <p>För detaljerade förfrågningar</p>
+                                    <a href="mailto:booking@wildlifeexplorerstenerife.com" style="color: #e67e22; text-decoration: none; font-weight: bold;">
+                                        booking@wildlifeexplorerstenerife.com
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="contact-method">
+                                <div class="contact-icon">📍</div>
+                                <div>
+                                    <h4>Vår Plats</h4>
+                                    <p>Calle Laderas del Mojón 27<br>Chayofa, Teneriffa</p>
+                                    <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">Vid foten av Montaña del Mojón vulkanen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <!-- Google Maps Embed with correct address -->
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.998!2d-16.723!3d28.105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc6a44d8d6e7f2ed%3A0x1a035dc7c44c6c8a!2sCalle%20Laderas%20del%20Moj%C3%B3n%2027%2C%2038650%20Chayofa%2C%20Santa%20Cruz%20de%20Tenerife%2C%20Spain!5e0!3m2!1sen!2ses!4v1700000000000"
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px;">Vanliga Frågor</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Vad ska vi ta med oss?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Bekväma vandringsskor, solskydd, hatt, vattenflaska och en liten ryggsäck. Vi tillhandahåller allt specialutrustning och material för aktiviteterna.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Vad händer vid dåligt väder?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Vi har skyddade områden och alternativa inomhusaktiviteter. Programmet körs i alla väderförhållanden om det inte finns säkerhetsrisker, i vilket fall vi ombokar eller återbetalar.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Finns det några åldersbegränsningar?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Barn från 3 år är välkomna! De under 7 år måste vara åtföljda av en vuxen. Barn 7+ kan delta självständigt med föräldrars samtycke.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Behöver vi speciell fysisk kondition?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Våra äventyr är utformade för genomsnittlig konditionsnivå. Vi anpassar tempot till gruppen och det finns alltid vilomöjligheter. Vänligen informera oss om eventuella specifika behov.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Vad är er avbokningspolicy?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Gratis avbokning upp till 72 timmar före äventyret. Mindre än 72 timmars varsel är inte återbetalningsbart. No-shows är inte återbetalningsbara.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Kan vuxna delta i aktiviteterna?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolut! Vuxna kan delta fullt ut i alla aktiviteter eller bara njuta av den vackra omgivningen - det är ditt val hur involverad du vill vara.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>© 2024 Wildlife Explorers Tenerife. Alla rättigheter förbehållna.</p>
+            </div>
+        </footer>
+        
+    </div>
+
+    <script>
+        // Automatisk videoavspelning vid hovring
+        document.querySelectorAll('.card').forEach(card => {
+            const video = card.querySelector('.activity-video');
+            
+            card.addEventListener('mouseenter', function() {
+                video.play();
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                video.pause();
+                video.currentTime = 0;
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const answer = this.nextElementSibling;
+                
+                // Stäng alla andra objekt
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').classList.remove('active');
+                    }
+                });
+                
+                // Växla aktuellt objekt
+                faqItem.classList.toggle('active');
+                answer.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
