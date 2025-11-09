@@ -9,33 +9,22 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
         
-        /* Hero Section */
+        /* Hero Section - ПРОСТОЙ И НАДЕЖНЫЙ */
         .hero { 
             position: relative;
             height: 100vh;
             overflow: hidden;
-        }
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-        }
-        /* Desktop - video background */
-        .desktop-bg {
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mountain-activity.jpg') center/cover;
         }
-        /* Mobile - только фото */
-        .mobile-bg {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mountain-activity.jpg') center/cover;
+        
+        /* Видео только для десктопа */
+        .desktop-video {
+            display: none;
         }
+        
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             color: white;
             text-align: center;
             padding: 100px 20px;
@@ -60,41 +49,30 @@
         }
         .btn:hover { background: #cf7116; }
 
-        /* Desktop - показываем видео */
+        /* Desktop - показываем видео поверх фото */
         @media (min-width: 769px) {
-            .desktop-bg {
-                background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+            .hero {
+                background: none;
             }
-            .desktop-bg::after {
+            .desktop-video {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1;
+            }
+            .hero::after {
                 content: '';
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: url('mountain-activity.jpg') center/cover;
-                z-index: -2;
-            }
-            .video-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -3;
-                overflow: hidden;
-            }
-            .video-background {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-
-        /* Mobile - скрываем видео */
-        @media (max-width: 768px) {
-            .video-container {
-                display: none;
+                background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+                z-index: 1;
             }
         }
 
@@ -141,15 +119,10 @@
 
     <!-- Hero Section -->
     <header class="hero">
-        <!-- Video only for desktop -->
-        <div class="video-container">
-            <video class="video-background" autoplay muted loop playsinline>
-                <source src="banner-video.mp4" type="video/mp4">
-            </video>
-        </div>
-        
-        <!-- Background for all devices -->
-        <div class="hero-background desktop-bg mobile-bg"></div>
+        <!-- Видео ТОЛЬКО для десктопа -->
+        <video class="desktop-video" autoplay muted loop playsinline>
+            <source src="banner-video.mp4" type="video/mp4">
+        </video>
         
         <div class="hero-content">
             <div class="container">
