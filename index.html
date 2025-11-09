@@ -6,38 +6,53 @@
     <title>Wildlife Explorers Tenerife | Family Adventure Camp</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
-        
-        /* Hero Section with VIDEO */
-        .hero { 
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; color: #333; 
             position: relative;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
-        .video-background {
-            position: absolute;
+        
+        /* Video Background for entire page */
+        .page-video-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: -2;
         }
-        .hero-content {
+        
+        /* Overlay for better readability */
+        .content-overlay {
             position: relative;
             z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            min-height: 100vh;
+        }
+        
+        /* Hero Section - теперь без своего видео */
+        .hero { 
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5));
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
             color: white;
             text-align: center;
             padding: 100px 20px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.3rem; margin-bottom: 1.5rem; }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
         .btn {
             display: inline-block;
             background: #e67e22;
@@ -52,10 +67,13 @@
         }
         .btn:hover { background: #cf7116; }
 
-        /* Mobile - показываем фото вместо видео */
+        /* Mobile - скрываем видео фон */
         @media (max-width: 768px) {
-            .video-background {
+            .page-video-bg {
                 display: none;
+            }
+            .content-overlay {
+                background: white;
             }
             .hero {
                 background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background_foto.jpg') center/cover;
@@ -63,7 +81,8 @@
         }
 
         /* Other Sections */
-        .intro { text-align: center; padding: 60px 20px; background: white; }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
+        .intro { text-align: center; padding: 60px 20px; }
         .intro h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
         .programs { padding: 60px 20px; }
         .programs h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: #2c3e50; }
@@ -76,8 +95,9 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            border: 1px solid #e0e0e0;
         }
         .card:hover { transform: translateY(-5px); }
         .card-img { 
@@ -96,119 +116,54 @@
         .included { margin: 30px 0; }
         .included ul { list-style: none; }
         .included li { margin-bottom: 10px; font-size: 1.1rem; }
-        .contact { padding: 60px 20px; text-align: center; background: white; }
+        .contact { padding: 60px 20px; text-align: center; }
         .contact h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
         footer { background: #34495e; color: #ecf0f1; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section with VIDEO -->
-    <header class="hero">
-        <video class="video-background" autoplay muted loop playsinline>
-            <source src="banner-video.mp4" type="video/mp4">
-        </video>
-        <div class="hero-content">
+    <!-- Video Background for entire page -->
+    <video class="page-video-bg" autoplay muted loop playsinline>
+        <source src="banner-video.mp4" type="video/mp4">
+    </video>
+    
+    <!-- Content Overlay -->
+    <div class="content-overlay">
+        
+        <!-- Hero Section -->
+        <header class="hero">
+            <div class="hero-content">
+                <div class="container">
+                    <h1>Wildlife Explorers Tenerife</h1>
+                    <p>Mountains, Deserts, Creativity & Adventure for Kids & Families!</p>
+                    <p>Discover the real Tenerife, far from the tourist hubs.</p>
+                    <a href="#programs" class="btn">Explore Our Adventures</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Остальной контент оставляем как был -->
+        <section class="intro">
             <div class="container">
-                <h1>Wildlife Explorers Tenerife</h1>
-                <p>Mountains, Deserts, Creativity & Adventure for Kids & Families!</p>
-                <p>Discover the real Tenerife, far from the tourist hubs.</p>
-                <a href="#programs" class="btn">Explore Our Adventures</a>
+                <h2>Escape the Ordinary in Chayofa</h2>
+                <p>Step away from the crowded beaches and discover the wild heart of Tenerife! Our day camp offers authentic adventures where kids become explorers, learning about Canarian nature and culture through hands-on experiences. Perfect for young adventurers and families seeking something truly special. <strong>Every adventure includes authentic Canarian lunch + delicious local snacks!</strong></p>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <!-- Intro Section -->
-<section class="intro">
-    <div class="container">
-        <h2>Escape the Ordinary in Chayofa</h2>
-        <p>Step away from the crowded beaches and discover the wild heart of Tenerife! Our day camp offers authentic adventures where kids become explorers, learning about Canarian nature and culture through hands-on experiences. Perfect for young adventurers and families seeking something truly special. <strong>Every adventure includes authentic Canarian lunch + delicious local snacks!</strong></p>
-    </div>
-</section>
-
-    <!-- Programs Section -->
-<section id="programs" class="programs">
-    <div class="container">
-        <h2>Choose Your Adventure</h2>
-        <div class="program-cards">
-
-   <!-- Program 1: Mountains & Volcanoes -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('mountain-activity.jpg');"></div>
-                <div class="card-content">
-                    <h3>Volcano Explorers: Secrets of the Mountains</h3>
-                    <p>Embark on an unforgettable journey to the heart of Tenerife's volcanic landscape! Young explorers will become geology detectives, uncovering the fiery secrets of the island's sleeping giants. We'll investigate different types of volcanic rocks, learn how the Teide volcano shaped the island, and discover why some mountains stand strong while others crumble to sand. Children will hear fascinating local legends about these geological wonders and understand the powerful forces that continue to shape our world today.</p>
-                    <ul>
-                        <li>🏔️ <strong>Guided mountain expedition</strong> with real volcanic rock discoveries</li>
-                        <li>📚 Interactive lessons about island geology and Canarian folklore</li>
-                        <li>🎨 <strong>Traditional craft workshop</strong> creating Guanche artifacts</li>
-                        <li>🔍 Hands-on experiments with different rock types</li>
-                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                    </ul>
+        <!-- Programs Section -->
+        <section id="programs" class="programs">
+            <div class="container">
+                <h2>Choose Your Adventure</h2>
+                <div class="program-cards">
+                    <!-- Ваши карточки с программами -->
                 </div>
             </div>
+        </section>
 
-            <!-- Program 2: Deserts -->
-            <div class="card">
-                <div class="card-img" style="background-image: url('desert-activity.jpg');"></div>
-                <div class="card-content">
-                    <h3>Desert Survivors: Life in the Arid Lands</h3>
-                    <p>Discover the hidden wonders of Tenerife's unique desert ecosystems! In this immersive adventure, children will learn how plants and animals not only survive but thrive in seemingly harsh conditions. We'll explore fascinating cactus gardens, identify different succulent species, and uncover the secret water-storage techniques that allow life to flourish in arid environments. Young naturalists will discover how traditional healers used desert plants for medicine and learn about the incredible adaptations that make desert life possible.</p>
-                    <ul>
-                        <li>🌵 <strong>Desert expedition</strong> through unique cactus and succulent gardens</li>
-                        <li>💧 Learn how plants store water and survive extreme conditions</li>
-                        <li>🌿 Discover medicinal plants used by traditional Canarian healers</li>
-                        <li>🎨 <strong>Creative workshop</strong> inspired by ancient Guanche crafts</li>
-                        <li>🔬 Interactive activities about desert animal adaptations</li>
-                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<!-- Practical Info Section -->
-<section class="info">
-    <div class="container">
-        <h2>Adventure Details</h2>
-        <p><strong>When:</strong> Daily from 9:00 AM - 4:00 PM</p>
-        <div class="price">70€</div>
-        <div class="included">
-            <p><strong>Your adventure includes:</strong></p>
-            <ul>
-                <li>👩‍🏫 Expert bilingual educator and guide</li>
-                <li>🍽️ <strong>Authentic Canarian lunch + healthy local snacks</strong></li>
-                <li>🛡️ Full insurance coverage</li>
-                <li>🎨 All materials for creative workshops</li>
-                <li>📷 Memorable photos of your adventure</li>
-                <li>💧 Drinking water and refreshments throughout the day</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<!-- Contact & Location Section -->
-<section class="contact">
-    <div class="container">
-        <h2>Ready for Adventure?</h2>
-        <p>We're based in <strong>Chayofa</strong>, just 2km from Los Cristianos - your gateway to authentic Tenerife experiences! <strong>Every booking includes delicious Canarian lunch and snacks to keep our explorers energized.</strong></p>
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-            <p><strong>🚗 By Car:</strong> Easy parking available</p>
-            <p><strong>🚌 By Bus:</strong> Line 418 stops nearby</p>
-            <p><strong>🎯 Transfer Service:</strong> We'll pick you up! (Advance booking required)</p>
-        </div>
-        <a href="mailto:booking@wildlifeexplorerstenerife.com" class="btn">Reserve Your Spot Today!</a>
-    </div>
-</section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2024 Wildlife Explorers Tenerife. All rights reserved.</p>
-        </div>
-    </footer>
+        <!-- Остальные секции -->
+        
+    </div> <!-- end content-overlay -->
 
 </body>
 </html>
