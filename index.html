@@ -1,331 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildlife Explorers Tenerife | Family Adventure Camp</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; color: #333;
-        }
-        
-        /* Video Background for entire page */
-        .page-video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-        
-        /* Main content */
-        .main-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Hero Section */
-        .hero { 
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            text-align: center;
-            padding: 100px 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
-        }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .hero p { font-size: 1.3rem; margin-bottom: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
-        .btn {
-            display: inline-block;
-            background: #e67e22;
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-        .btn:hover { background: #cf7116; }
+<!-- Programs Section -->
+<section id="programs" class="programs">
+    <div class="container">
+        <h2>Choose Your Adventure</h2>
+        <div class="program-cards">
 
-        /* Video Cards with Hover Effect */
-        .video-card {
-            position: relative;
-            height: 250px;
-            overflow: hidden;
-            background: #000;
-        }
-        
-        .preview-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.5s ease;
-        }
-        
-        .activity-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.7) 100%);
-            z-index: 2;
-            pointer-events: none;
-        }
-        
-        /* Hover effect */
-        .card:hover .activity-video {
-            opacity: 1;
-        }
-        
-        .card:hover .preview-image {
-            opacity: 0;
-        }
-
-        /* Content sections with semi-transparent background */
-        .intro, .programs, .contact { 
-            background: rgba(255, 255, 255, 0.92);
-            padding: 60px 20px;
-        }
-        
-        .info { 
-            background: rgba(44, 62, 80, 0.95);
-            color: white;
-            padding: 60px 20px;
-        }
-
-        /* Mobile - скрываем видео фон и убираем прозрачность */
-        @media (max-width: 768px) {
-            .page-video-bg {
-                display: none;
-            }
-            .intro, .programs, .contact { 
-                background: white;
-            }
-            .info { 
-                background: #2c3e50;
-            }
-            .hero {
-                background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background_foto.jpg') center/cover;
-            }
-            .hero-content {
-                background: none;
-            }
-            
-            /* На мобильных отключаем hover эффект */
-            .card:hover .activity-video {
-                opacity: 0;
-            }
-            .card:hover .preview-image {
-                opacity: 1;
-            }
-        }
-
-        /* Other Sections */
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
-        .intro { text-align: center; }
-        .intro h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
-        .programs {  }
-        .programs h2 { text-align: center; font-size: 2.2rem; margin-bottom: 40px; color: #2c3e50; }
-        .program-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        .card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-            border: 1px solid #e0e0e0;
-            cursor: pointer;
-        }
-        .card:hover { transform: translateY(-5px); }
-        .card-content { padding: 25px; }
-        .card h3 { color: #2c3e50; margin-bottom: 10px; }
-        .card ul { margin: 15px 0; padding-left: 20px; }
-        .card li { margin-bottom: 8px; }
-        .info h2 { font-size: 2.2rem; margin-bottom: 30px; }
-        .price { font-size: 3rem; font-weight: bold; color: #e67e22; margin: 20px 0; }
-        .included { margin: 30px 0; }
-        .included ul { list-style: none; }
-        .included li { margin-bottom: 10px; font-size: 1.1rem; }
-        .contact { text-align: center; }
-        .contact h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
-        footer { background: #34495e; color: #ecf0f1; text-align: center; padding: 20px; }
-    </style>
-</head>
-<body>
-
-    <!-- Video Background for entire page -->
-    <video class="page-video-bg" autoplay muted loop playsinline>
-        <source src="banner-video.mp4" type="video/mp4">
-    </video>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        
-        <!-- Hero Section -->
-        <header class="hero">
-            <div class="hero-content">
-                <div class="container">
-                    <h1>Wildlife Explorers Tenerife</h1>
-                    <p>Mountains, Deserts, Creativity & Adventure for Kids & Families!</p>
-                    <p>Discover the real Tenerife, far from the tourist hubs.</p>
-                    <a href="#programs" class="btn">Explore Our Adventures</a>
+            <!-- Program 1: Mountains & Volcanoes -->
+            <div class="card">
+                <div class="video-card">
+                    <img src="mountain-activity.jpg" class="preview-image" alt="Mountain Adventure">
+                    <video class="activity-video" muted loop playsinline>
+                        <source src="mountain-activity-video.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay"></div>
                 </div>
-            </div>
-        </header>
-
-        <!-- Intro Section -->
-        <section class="intro">
-            <div class="container">
-                <h2>Escape the Ordinary in Chayofa</h2>
-                <p>Step away from the crowded beaches and discover the wild heart of Tenerife! Our day camp offers authentic adventures where kids become explorers, learning about Canarian nature and culture through hands-on experiences. Perfect for young adventurers and families seeking something truly special. <strong>Every adventure includes authentic Canarian lunch + delicious local snacks!</strong></p>
-            </div>
-        </section>
-
-        <!-- Programs Section -->
-        <section id="programs" class="programs">
-            <div class="container">
-                <h2>Choose Your Adventure</h2>
-                <div class="program-cards">
-
-                    <!-- Program 1: Mountains & Volcanoes -->
-                    <div class="card">
-                        <div class="video-card">
-                            <img src="mountain-activity.jpg" class="preview-image" alt="Mountain Adventure">
-                            <video class="activity-video" muted loop playsinline>
-                                <source src="mountain-activity-video.mp4" type="video/mp4">
-                            </video>
-                            <div class="video-overlay"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Volcano Explorers: Secrets of the Mountains</h3>
-                            <p>Embark on an unforgettable journey to the heart of Tenerife's volcanic landscape! Young explorers will become geology detectives, uncovering the fiery secrets of the island's sleeping giants. We'll investigate different types of volcanic rocks, learn how the Teide volcano shaped the island, and discover why some mountains stand strong while others crumble to sand.</p>
-                            <ul>
-                                <li>🏔️ <strong>Guided mountain expedition</strong> with real volcanic rock discoveries</li>
-                                <li>📚 Interactive lessons about island geology and Canarian folklore</li>
-                                <li>🎨 <strong>Traditional craft workshop</strong> creating Guanche artifacts</li>
-                                <li>🔍 Hands-on experiments with different rock types</li>
-                                <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Program 2: Deserts -->
-                    <div class="card">
-                        <div class="video-card">
-                            <img src="desert-activity.jpg" class="preview-image" alt="Desert Adventure">
-                            <video class="activity-video" muted loop playsinline>
-                                <source src="desert-activity-video.mp4" type="video/mp4">
-                            </video>
-                            <div class="video-overlay"></div>
-                        </div>
-                        <div class="card-content">
-                            <h3>Desert Survivors: Life in the Arid Lands</h3>
-                            <p>Discover the hidden wonders of Tenerife's unique desert ecosystems! In this immersive adventure, children will learn how plants and animals not only survive but thrive in seemingly harsh conditions. We'll explore fascinating cactus gardens, identify different succulent species, and uncover the secret water-storage techniques that allow life to flourish in arid environments.</p>
-                            <ul>
-                                <li>🌵 <strong>Desert expedition</strong> through unique cactus and succulent gardens</li>
-                                <li>💧 Learn how plants store water and survive extreme conditions</li>
-                                <li>🌿 Discover medicinal plants used by traditional Canarian healers</li>
-                                <li>🎨 <strong>Creative workshop</strong> inspired by ancient Guanche crafts</li>
-                                <li>🔬 Interactive activities about desert animal adaptations</li>
-                                <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Info Section -->
-        <section class="info">
-            <div class="container">
-                <h2>Adventure Details</h2>
-                <p><strong>When:</strong> Daily from 9:00 AM - 4:00 PM</p>
-                <div class="price">70€</div>
-                <div class="included">
-                    <p><strong>Your adventure includes:</strong></p>
+                <div class="card-content">
+                    <h3>Volcano Explorers: Secrets of the Mountains</h3>
+                    <p>Embark on an unforgettable journey to the heart of Tenerife's volcanic landscape! Young explorers will become geology detectives, uncovering the fiery secrets of the island's sleeping giants.</p>
                     <ul>
-                        <li>👩‍🏫 Expert bilingual educator and guide</li>
-                        <li>🍽️ <strong>Authentic Canarian lunch + healthy local snacks</strong></li>
-                        <li>🛡️ Full insurance coverage</li>
-                        <li>🎨 All materials for creative workshops</li>
-                        <li>📷 Memorable photos of your adventure</li>
-                        <li>💧 Drinking water and refreshments throughout the day</li>
+                        <li>🏔️ <strong>Guided mountain expedition</strong> with real volcanic rock discoveries</li>
+                        <li>📚 Interactive lessons about island geology and Canarian folklore</li>
+                        <li>🎨 <strong>Traditional craft workshop</strong> creating Guanche artifacts</li>
+                        <li>🔍 Hands-on experiments with different rock types</li>
+                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
                     </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- Contact Section -->
-        <section class="contact">
-            <div class="container">
-                <h2>Ready for Adventure?</h2>
-                <p>We're based in <strong>Chayofa</strong>, just 2km from Los Cristianos - your gateway to authentic Tenerife experiences! <strong>Every booking includes delicious Canarian lunch and snacks to keep our explorers energized.</strong></p>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <p><strong>🚗 By Car:</strong> Easy parking available</p>
-                    <p><strong>🚌 By Bus:</strong> Line 418 stops nearby</p>
-                    <p><strong>🎯 Transfer Service:</strong> We'll pick you up! (Advance booking required)</p>
+            <!-- Program 2: Deserts -->
+            <div class="card">
+                <div class="video-card">
+                    <img src="desert-activity.jpg" class="preview-image" alt="Desert Adventure">
+                    <video class="activity-video" muted loop playsinline>
+                        <source src="desert-activity-video.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay"></div>
                 </div>
-                <a href="mailto:booking@wildlifeexplorerstenerife.com" class="btn">Reserve Your Spot Today!</a>
+                <div class="card-content">
+                    <h3>Desert Survivors: Life in the Arid Lands</h3>
+                    <p>Discover the hidden wonders of Tenerife's unique desert ecosystems! In this immersive adventure, children will learn how plants and animals not only survive but thrive in seemingly harsh conditions.</p>
+                    <ul>
+                        <li>🌵 <strong>Desert expedition</strong> through unique cactus and succulent gardens</li>
+                        <li>💧 Learn how plants store water and survive extreme conditions</li>
+                        <li>🌿 Discover medicinal plants used by traditional Canarian healers</li>
+                        <li>🎨 <strong>Creative workshop</strong> inspired by ancient Guanche crafts</li>
+                        <li>🔬 Interactive activities about desert animal adaptations</li>
+                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
+                    </ul>
+                </div>
             </div>
-        </section>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <p>© 2024 Wildlife Explorers Tenerife. All rights reserved.</p>
-            </div>
-        </footer>
-        
+        </div>
     </div>
+</section>
 
-    <script>
-        // Автоматическое воспроизведение видео при наведении
-        document.querySelectorAll('.card').forEach(card => {
-            const video = card.querySelector('.activity-video');
-            
-            card.addEventListener('mouseenter', function() {
-                video.play();
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                video.pause();
-                video.currentTime = 0; // Сбрасываем видео в начало
-            });
+<script>
+    // Автовоспроизведение видео при наведении
+    document.querySelectorAll('.card').forEach(card => {
+        const video = card.querySelector('.activity-video');
+        
+        card.addEventListener('mouseenter', function() {
+            video.play();
         });
-    </script>
-
-</body>
-</html>
+        
+        card.addEventListener('mouseleave', function() {
+            video.pause();
+            video.currentTime = 0;
+        });
+    });
+</script>
