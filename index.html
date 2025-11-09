@@ -110,7 +110,7 @@
         }
 
         /* Content sections with semi-transparent background */
-        .intro, .programs, .contact { 
+        .intro, .programs, .contact, .faq { 
             background: rgba(255, 255, 255, 0.92);
             padding: 60px 20px;
         }
@@ -126,7 +126,7 @@
             .page-video-bg {
                 display: none;
             }
-            .intro, .programs, .contact { 
+            .intro, .programs, .contact, .faq { 
                 background: white;
             }
             .info { 
@@ -146,6 +146,96 @@
             .card:hover .preview-image {
                 opacity: 1;
             }
+        }
+
+        /* Pricing Section */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(230, 126, 34, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            border-color: #e67e22;
+        }
+        
+        .pricing-card h3 {
+            color: #e67e22;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .price-main {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e67e22;
+            margin: 15px 0;
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* FAQ Section */
+        .faq-item {
+            background: white;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: #f8f9fa;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
 
         /* Other Sections */
@@ -200,7 +290,7 @@
                     <h1>Wildlife Explorers Tenerife</h1>
                     <p>Mountains, Deserts, Creativity & Adventure for Kids & Families!</p>
                     <p>Discover the real Tenerife, far from the tourist hubs.</p>
-                    <a href="#programs" class="btn">Explore Our Adventures</a>
+                    <a href="https://wa.me/358466124869?text=Hello! I'd like to book Wildlife Explorers adventure in Tenerife" class="btn">Book Your Adventure Now!</a>
                 </div>
             </div>
         </header>
@@ -208,74 +298,104 @@
         <!-- Intro Section -->
         <section class="intro">
             <div class="container">
-                <h2>Escape the Ordinary in Chayofa</h2>
-                <p>Step away from the crowded beaches and discover the wild heart of Tenerife! Our day camp offers authentic adventures where kids become explorers, learning about Canarian nature and culture through hands-on experiences. Perfect for young adventurers and families seeking something truly special. <strong>Every adventure includes authentic Canarian lunch + delicious local snacks!</strong></p>
+                <h2>Escape the Ordinary in South Tenerife</h2>
+                <p>Step away from the crowded beaches and discover the wild heart of Tenerife! Located in the mountain area of Chayofa, situated in the hills directly above Los Cristianos and Las Americas, our day camp offers authentic adventures where kids become explorers, learning about Canarian nature and culture through hands-on experiences. Perfect for young adventurers and families seeking something truly special. <strong>Every adventure includes authentic Canarian lunch + delicious local snacks!</strong></p>
             </div>
         </section>
 
-  <!-- Programs Section -->
-<section id="programs" class="programs">
-    <div class="container">
-        <h2>Choose Your Adventure</h2>
-        <div class="program-cards">
+        <!-- Programs Section -->
+        <section id="programs" class="programs">
+            <div class="container">
+                <h2>Choose Your Adventure</h2>
+                <div class="program-cards">
 
-            <!-- Program 1: Mountains & Volcanoes -->
-            <div class="card">
-                <div class="video-card">
-                    <img src="mountain-activity.jpg" class="preview-image" alt="Mountain Adventure">
-                    <video class="activity-video" muted loop playsinline>
-                        <source src="mountain-activity-video.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <h3>Volcano Explorers: Secrets of the Mountains</h3>
-                    <p>Embark on an unforgettable journey to the heart of Tenerife's volcanic landscape! Young explorers will become geology detectives, uncovering the fiery secrets of the island's sleeping giants.</p>
-                    <ul>
-                        <li>🏔️ <strong>Guided mountain expedition</strong> with real volcanic rock discoveries</li>
-                        <li>📚 Interactive lessons about island geology and Canarian folklore</li>
-                        <li>🎨 <strong>Traditional craft workshop</strong> creating Guanche artifacts</li>
-                        <li>🔍 Hands-on experiments with different rock types</li>
-                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                    </ul>
+                    <!-- Program 1: Mountains & Volcanoes -->
+                    <div class="card">
+                        <div class="video-card">
+                            <img src="mountain-activity.jpg" class="preview-image" alt="Mountain Adventure">
+                            <video class="activity-video" muted loop playsinline>
+                                <source src="mountain-activity-video.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Volcano Explorers: Secrets of the Mountains</h3>
+                            <p>Embark on an unforgettable journey to the heart of Tenerife's volcanic landscape! Young explorers will become geology detectives, uncovering the fiery secrets of the island's sleeping giants. We'll investigate different types of volcanic rocks, learn how the Teide volcano shaped the island, and discover why some mountains stand strong while others crumble to sand.</p>
+                            <ul>
+                                <li>🏔️ <strong>Guided mountain expedition</strong> with real volcanic rock discoveries</li>
+                                <li>📚 Interactive lessons about island geology and Canarian folklore</li>
+                                <li>🎨 <strong>Traditional craft workshop</strong> creating Guanche artifacts</li>
+                                <li>🔍 Hands-on experiments with different rock types</li>
+                                <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Program 2: Deserts -->
+                    <div class="card">
+                        <div class="video-card">
+                            <img src="desert-activity.jpg" class="preview-image" alt="Desert Adventure">
+                            <video class="activity-video" muted loop playsinline>
+                                <source src="desert-activity-video.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-overlay"></div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Desert Survivors: Life in the Arid Lands</h3>
+                            <p>Discover the hidden wonders of Tenerife's unique desert ecosystems! In this immersive adventure, children will learn how plants and animals not only survive but thrive in seemingly harsh conditions. We'll explore fascinating cactus gardens, identify different succulent species, and uncover the secret water-storage techniques that allow life to flourish in arid environments.</p>
+                            <ul>
+                                <li>🌵 <strong>Desert expedition</strong> through unique cactus and succulent gardens</li>
+                                <li>💧 Learn how plants store water and survive extreme conditions</li>
+                                <li>🌿 Discover medicinal plants used by traditional Canarian healers</li>
+                                <li>🎨 <strong>Creative workshop</strong> inspired by ancient Guanche crafts</li>
+                                <li>🔬 Interactive activities about desert animal adaptations</li>
+                                <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+        </section>
 
-            <!-- Program 2: Deserts -->
-            <div class="card">
-                <div class="video-card">
-                    <img src="desert-activity.jpg" class="preview-image" alt="Desert Adventure">
-                    <video class="activity-video" muted loop playsinline>
-                        <source src="desert-activity-video.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-overlay"></div>
-                </div>
-                <div class="card-content">
-                    <h3>Desert Survivors: Life in the Arid Lands</h3>
-                    <p>Discover the hidden wonders of Tenerife's unique desert ecosystems! In this immersive adventure, children will learn how plants and animals not only survive but thrive in seemingly harsh conditions.</p>
-                    <ul>
-                        <li>🌵 <strong>Desert expedition</strong> through unique cactus and succulent gardens</li>
-                        <li>💧 Learn how plants store water and survive extreme conditions</li>
-                        <li>🌿 Discover medicinal plants used by traditional Canarian healers</li>
-                        <li>🎨 <strong>Creative workshop</strong> inspired by ancient Guanche crafts</li>
-                        <li>🔬 Interactive activities about desert animal adaptations</li>
-                        <li>🍽️ <strong>Authentic Canarian lunch + local snacks</strong> included</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-        <!-- Info Section -->
+        <!-- Practical Info Section -->
         <section class="info">
             <div class="container">
                 <h2>Adventure Details</h2>
-                <p><strong>When:</strong> Daily from 9:00 AM - 4:00 PM</p>
-                <div class="price">70€</div>
+                <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem;">Located in the mountain area of Chayofa, situated in the hills directly above Los Cristianos and Las Americas</p>
+                
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>1 Child + 1 Adult</h3>
+                        <div class="price-main">79€</div>
+                        <p>Perfect for parent-child bonding</p>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>1 Child + 2 Adults</h3>
+                        <div class="price-main">99€</div>
+                        <p>Great for family adventures</p>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <h3>2 Children + 2 Adults</h3>
+                        <div class="price-main">139€</div>
+                        <p>Best value for families</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 30px 0;">
+                    <h3 style="color: #e67e22; margin-bottom: 20px;">Additional Participants</h3>
+                    <div style="display: inline-block; text-align: left; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+                        <p>➕ Additional child: <strong>40€</strong></p>
+                        <p>➕ Additional adult: <strong>20€</strong></p>
+                        <p>👦 Child from 7 years (solo): <strong>70€</strong></p>
+                        <p>🚗 Transfer (within 15km): <strong>10€</strong></p>
+                    </div>
+                </div>
+
                 <div class="included">
-                    <p><strong>Your adventure includes:</strong></p>
+                    <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Every adventure includes:</strong></p>
                     <ul>
                         <li>👩‍🏫 Expert bilingual educator and guide</li>
                         <li>🍽️ <strong>Authentic Canarian lunch + healthy local snacks</strong></li>
@@ -288,17 +408,103 @@
             </div>
         </section>
 
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 40px; color: #2c3e50;">Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What should we bring with us?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Comfortable walking shoes, sunscreen, hat, water bottle, and a small backpack. We provide all specialized equipment and materials for the activities.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What happens in case of bad weather?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We have sheltered areas and alternative indoor activities. The program runs in all weather conditions unless there are safety concerns, in which case we'll reschedule or refund.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Are there any age restrictions?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Children from 3 years are welcome! Those under 7 must be accompanied by an adult. Children 7+ can participate independently with parental consent.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Do we need special physical fitness?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our adventures are designed for average fitness levels. We adapt the pace to the group, and there are always rest options. Please inform us of any specific needs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What is your cancellation policy?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Free cancellation up to 48 hours before the adventure. Within 48 hours, we offer rescheduling. No-shows are non-refundable.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Can adults participate in activities?
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! Adults can fully participate in all activities or simply enjoy the beautiful surroundings - it's your choice how involved you'd like to be.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact">
             <div class="container">
                 <h2>Ready for Adventure?</h2>
-                <p>We're based in <strong>Chayofa</strong>, just 2km from Los Cristianos - your gateway to authentic Tenerife experiences! <strong>Every booking includes delicious Canarian lunch and snacks to keep our explorers energized.</strong></p>
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
-                    <p><strong>🚗 By Car:</strong> Easy parking available</p>
-                    <p><strong>🚌 By Bus:</strong> Line 418 stops nearby</p>
-                    <p><strong>🎯 Transfer Service:</strong> We'll pick you up! (Advance booking required)</p>
+                <p>Have more questions or ready to book your spot? We're here to help!</p>
+                
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 10px; margin: 25px 0; text-align: center;">
+                    <p style="margin-bottom: 15px;"><strong>📞 Quick Booking via WhatsApp</strong></p>
+                    <a href="https://wa.me/358466124869?text=Hello! I'd like to book Wildlife Explorers adventure in Tenerife" class="btn" style="margin: 10px;">
+                        📱 Reserve via WhatsApp
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.9rem; color: #666;">We typically respond within minutes!</p>
                 </div>
-                <a href="mailto:booking@wildlifeexplorerstenerife.com" class="btn">Reserve Your Spot Today!</a>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">🚗 Getting Here</h4>
+                        <p>Easy parking available<br>Bus line 418 stops nearby</p>
+                    </div>
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">🎯 Transfer Service</h4>
+                        <p>We pick up within 15km of Los Cristianos<br><strong>Only 10€</strong></p>
+                    </div>
+                    <div style="text-align: center; padding: 20px;">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px;">🕐 Schedule</h4>
+                        <p>Daily 9:00 - 16:00<br>Advance booking required</p>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -311,18 +517,41 @@
         
     </div>
 
-  <script>
-    // Автовоспроизведение видео при наведении
-    document.querySelectorAll('.card').forEach(card => {
-        const video = card.querySelector('.activity-video');
-        
-        card.addEventListener('mouseenter', function() {
-            video.play();
+    <script>
+        // Автоматическое воспроизведение видео при наведении
+        document.querySelectorAll('.card').forEach(card => {
+            const video = card.querySelector('.activity-video');
+            
+            card.addEventListener('mouseenter', function() {
+                video.play();
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                video.pause();
+                video.currentTime = 0;
+            });
         });
-        
-        card.addEventListener('mouseleave', function() {
-            video.pause();
-            video.currentTime = 0;
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const answer = this.nextElementSibling;
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    if (item !== faqItem) {
+                        item.classList.remove('active');
+                        item.querySelector('.faq-answer').classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                faqItem.classList.toggle('active');
+                answer.classList.toggle('active');
+            });
         });
-    });
-</script>
+    </script>
+
+</body>
+</html>
