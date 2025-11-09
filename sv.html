@@ -3,15 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildlife Explorers Tenerife | Familjeäventyr Läger</title>
+    <title>Wildlife Explorers Teneriffa | Familjeäventyr</title>
     <style>
-        /* Samma CSS som den engelska versionen */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             line-height: 1.6; color: #333;
         }
         
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(230, 126, 34, 0.3);
+        }
+        
+        .language-switcher select {
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
+            outline: none;
+            width: 120px;
+        }
+        
+        .language-switcher select option {
+            background: white;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            
+            .language-switcher select {
+                font-size: 0.9rem;
+                width: 110px;
+            }
+        }
+
+        /* Video Background for entire page */
         .page-video-bg {
             position: fixed;
             top: 0;
@@ -22,11 +65,13 @@
             z-index: -1;
         }
         
+        /* Main content */
         .main-content {
             position: relative;
             z-index: 1;
         }
         
+        /* Hero Section */
         .hero { 
             position: relative;
             height: 100vh;
@@ -61,6 +106,7 @@
         }
         .btn:hover { background: #cf7116; }
 
+        /* Video Cards with Hover Effect */
         .video-card {
             position: relative;
             height: 250px;
@@ -97,6 +143,7 @@
             pointer-events: none;
         }
         
+        /* Hover effect */
         .card:hover .activity-video {
             opacity: 1;
         }
@@ -105,6 +152,7 @@
             opacity: 0;
         }
 
+        /* Content sections with semi-transparent background */
         .intro, .programs, .info, .contact { 
             background: rgba(255, 255, 255, 0.80);
             padding: 60px 20px;
@@ -116,6 +164,7 @@
             padding: 60px 20px;
         }
 
+        /* Mobile - скрываем видео фон и убираем прозрачность */
         @media (max-width: 768px) {
             .page-video-bg {
                 display: none;
@@ -133,6 +182,7 @@
                 background: none;
             }
             
+            /* На мобильных отключаем hover эффект */
             .card:hover .activity-video {
                 opacity: 0;
             }
@@ -141,6 +191,7 @@
             }
         }
 
+        /* Pricing Section */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -175,6 +226,7 @@
             margin: 15px 0;
         }
 
+        /* Contact Section */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -233,6 +285,7 @@
             border: none;
         }
 
+        /* FAQ Section */
         .faq-item {
             background: white;
             margin: 15px 0;
@@ -267,6 +320,7 @@
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
             color: #2c3e50;
+    
         }
         
         .faq-answer.active {
@@ -282,6 +336,7 @@
             transform: rotate(180deg);
         }
 
+        /* Other Sections */
         .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
         .intro { text-align: center; }
         .intro h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; }
@@ -312,41 +367,23 @@
         .included li { margin-bottom: 10px; font-size: 1.1rem; }
         .contact h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c3e50; text-align: center; }
         footer { background: #34495e; color: #ecf0f1; text-align: center; padding: 20px; }
-
-        /* Language switcher */
-        .language-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-        .lang-btn {
-            background: rgba(255,255,255,0.9);
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        .lang-btn:hover {
-            background: #e67e22;
-            color: white;
-        }
     </style>
 </head>
 <body>
 
-    <!-- Video Background -->
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <select id="languageSelect">
+            <option value="en">English</option>
+            <option value="sv" selected>Svenska</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
+
+    <!-- Video Background for entire page -->
     <video class="page-video-bg" autoplay muted loop playsinline>
         <source src="banner-video.mp4" type="video/mp4">
     </video>
-
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <a href="index.html" class="lang-btn">English</a>
-        <a href="index-se.html" class="lang-btn" style="background: #e67e22; color: white;">Svenska</a>
-    </div>
     
     <!-- Main Content -->
     <div class="main-content">
@@ -355,9 +392,9 @@
         <header class="hero">
             <div class="hero-content">
                 <div class="container">
-                    <h1>Wildlife Explorers Tenerife</h1>
+                    <h1>Wildlife Explorers Teneriffa</h1>
                     <p>Berg, Öknar, Kreativitet & Äventyr för Barn & Familjer!</p>
-                    <p>Upptäck den riktiga Teneriffa, bortom turistområdena.</p>
+                    <p>Upptäck den riktiga Teneriffa, inte bara turistområdena.</p>
                     <a href="https://wa.me/358466124869?text=Hej! Jag vill boka Wildlife Explorers äventyr på Teneriffa" class="btn">Boka Ditt Äventyr Nu!</a>
                 </div>
             </div>
@@ -366,8 +403,8 @@
         <!-- Intro Section -->
         <section class="intro">
             <div class="container">
-                <h2>Äventyr Vid Foten Av En Vulkan</h2>
-                <p>Upptäck Teneriffas vilda sida från vår unika bas vid Calle Laderas del Mojón 27, belägen vid den majestätiska Montaña del Mojón-vulkanen i Chayofa. Bara minuter ovanför turistcentra men ändå en helt annan värld. Vi erbjuder interaktiva pedagogiska äventyr där både barn och föräldrar får uppleva autentisk kanarisk natur, kultur och traditioner.</p>
+                <h2>Äventyr vid foten av en vulkan</h2>
+                <p>Upptäck Teneriffas vilda sida från vår unika bas precis under den majestätiska Montaña del Mojón-vulkanen, bara minuter ovanför turistcentra Los Cristianos och Las Americas. Vi erbjuder interaktiva pedagogiska äventyr där både barn och föräldrar får kontakt med autentisk kanarisk natur, kultur och traditioner.</p>
                 <p>Varje äventyr inkluderar professionell guidning, alla material och kanarisk lunch.</p>
             </div>
         </section>
@@ -389,11 +426,11 @@
                         </div>
                         <div class="card-content">
                             <h3>Vulkanutforskare: Bergens Hemligheter</h3>
-                            <p>Följ med på en oförglömlig resa till hjärtat av Teneriffas vulkaniska landskap! Unga upptäcktsresande blir geologidetektiver som avslöjar de eldiga hemligheterna hos öns sovande jättar. Vi undersöker olika typer av vulkanbergarter, lär oss hur Teide-vulkanen formade ön och upptäcker varför vissa berg står starka medan andra smulas sönder till sand. Vi kommer också att skapa traditionellt Guanche-hantverk - den lokala kulturen på Teneriffa.</p>
+                            <p>Följ med oss på en oförglömlig resa till hjärtat av Teneriffas vulkaniska landskap! Unga utforskare blir geologidetektiver som avslöjar öns sovande jättars eldfyllda hemligheter. Vi undersöker olika typer av vulkaniska bergarter, lär oss hur Teide-vulkanen formade ön och upptäcker varför vissa berg står starka medan andra vittrar sönder till sand. Vi kommer också att skapa ett traditionellt hantverk från Guanche-kulturen - Teneriffas ursprungsbefolkning.</p>
                             <ul>
-                                <li>🏔️ <strong>Guidad bergsexpedition</strong> med äkta vulkanstensupptäckter</li>
+                                <li>🏔️ <strong>Guidad bergsexpedition</strong> med upptäckter av vulkaniska bergarter</li>
                                 <li>📚 Interaktiva lektioner om öns geologi och kanarisk folklore</li>
-                                <li>🎨 <strong>Traditionellt hantverksworkshop</strong> skapar Guanche-artefakter</li>
+                                <li>🎨 <strong>Traditionellt hantverksworkshop</strong> med skapande av Guanche-artefakter</li>
                                 <li>🔍 Praktiska experiment med olika bergarter</li>
                                 <li>🍽️ <strong>Autentisk kanarisk lunch</strong> ingår</li>
                             </ul>
@@ -410,13 +447,13 @@
                             <div class="video-overlay"></div>
                         </div>
                         <div class="card-content">
-                            <h3>Ökenöverlevare: Liv i Arida Land</h3>
-                            <p>Upptäck Teneriffas unika ökenekosystems dolda underverk! I detta immersiva äventyr lär sig barn hur växter och djur inte bara överlever utan frodas i till synes tuffa förhållanden. Vi utforskar en kaktusträdgård, identifierar olika suckulenta arter och avslöjar de hemliga vattenlagringstekniker som gör att liv kan blomstra i öknen. Efteråt skapar barn traditionella Guanche-hantverk och smakar uppfriskande kaktusjuice, för nu vet de... hur man överlever i öknen.</p>
+                            <h3>Ökenöverlevare: Liv i Arida Landskap</h3>
+                            <p>Upptäck Teneriffas unika ökenekosystemers dolda under! I detta immersiva äventyr lär sig barn hur växter och djur inte bara överlever utan frodas i till synes hårda förhållanden. Vi utforskar en kaktusträdgård, identifierar olika suckulenta arter och avslöjar de hemliga vattenlagringstekniker som gör att liv kan blomstra i öknen. Efter allt detta kommer barnen att skapa traditionella Guanche-hantverk och smaka uppfriskande kaktusjuice, för nu vet de... hur man överlever i öknen.</p>
                             <ul>
                                 <li>🌵 <strong>Ökenexpedition</strong> genom unik kaktus- och suckulentträdgård</li>
                                 <li>💧 Lär dig hur växter och djur överlever extrema förhållanden</li>
                                 <li>🎨 <strong>Kreativ workshop</strong> inspirerad av forntida Guanche-hantverk</li>
-                                <li>🌿 Upptäck läkeväxter som användes av traditionella kanariska healers</li>
+                                <li>🌿 Upptäck medicinska växter som använts av traditionella kanariska healers</li>
                                 <li>🍽️ <strong>Autentisk kanarisk lunch</strong> ingår</li>
                             </ul>
                         </div>
@@ -455,7 +492,7 @@
                     <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Varje äventyr inkluderar:</strong></p>
                     <ul>
                         <li>👩‍🏫 Expert tvåspråkig pedagog och guide</li>
-                        <li>🎨 Alla material för kreativa workshop</li>
+                        <li>🎨 Alla material för kreativa workshops</li>
                         <li>🍽️ Autentisk kanarisk lunch</li>
                         <li>📷 Minnesvärda foton från ditt äventyr</li>
                     </ul>
@@ -466,7 +503,7 @@
                     <p style="text-align: center; font-size: 1.3rem; margin-bottom: 25px;"><strong>Extratjänster:</strong></p>
                     <ul>
                         <li>🚗 <strong>Transfer</strong> (10€ inom 15km från Los Cristianos)</li>
-                        <li>👕🎒 <strong>Wildlife Explorers Tenerife presentpaket</strong> - T-shirt + väska (20€)</li>
+                        <li>👕🎒 <strong>Wildlife Explorers Teneriffa presentpaket</strong> - T-shirt + väska (20€)</li>
                     </ul>
                 </div>
 
@@ -517,7 +554,7 @@
                                 <div>
                                     <h4>Vår Plats</h4>
                                     <p>Calle Laderas del Mojón 27<br>Chayofa, Teneriffa</p>
-                                    <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">Vid foten av Montaña del Mojón vulkanen</p>
+                                    <p style="font-size: 0.9rem; color: #666; margin-top: 5px;">Vid foten av Montaña del Mojón-vulkanen</p>
                                 </div>
                             </div>
                         </div>
@@ -547,7 +584,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Bekväma vandringsskor, solskydd, hatt, vattenflaska och en liten ryggsäck. Vi tillhandahåller allt specialutrustning och material för aktiviteterna.</p>
+                        <p>Bekväma promenadskor, solskydd, hatt, vattenflaska och en liten ryggsäck. Vi tillhandahåller allt specialutrustning och material för aktiviteterna.</p>
                     </div>
                 </div>
                 
@@ -557,7 +594,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Vi har skyddade områden och alternativa inomhusaktiviteter. Programmet körs i alla väderförhållanden om det inte finns säkerhetsrisker, i vilket fall vi ombokar eller återbetalar.</p>
+                        <p>Vi har skyddade områden och alternativa inomhusaktiviteter. Programmet körs i alla väderförhållanden om inte säkerhetsrisker föreligger, i vilket fall vi ombokar eller återbetalar.</p>
                     </div>
                 </div>
                 
@@ -567,7 +604,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Barn från 3 år är välkomna! De under 7 år måste vara åtföljda av en vuxen. Barn 7+ kan delta självständigt med föräldrars samtycke.</p>
+                        <p>Barn från 3 år är välkomna! Barn under 7 år måste vara åtföljda av en vuxen. Barn 7+ kan delta självständigt med föräldrars samtycke.</p>
                     </div>
                 </div>
                 
@@ -577,7 +614,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Våra äventyr är utformade för genomsnittlig konditionsnivå. Vi anpassar tempot till gruppen och det finns alltid vilomöjligheter. Vänligen informera oss om eventuella specifika behov.</p>
+                        <p>Våra äventyr är utformade för genomsnittlig kondition. Vi anpassar tempot till gruppen och det finns alltid vilomöjligheter. Vänligen informera oss om eventuella specifika behov.</p>
                     </div>
                 </div>
                 
@@ -597,7 +634,7 @@
                         <span class="faq-icon">▼</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Absolut! Vuxna kan delta fullt ut i alla aktiviteter eller bara njuta av den vackra omgivningen - det är ditt val hur involverad du vill vara.</p>
+                        <p>Absolut! Vuxna kan delta fullt ut i alla aktiviteter eller helt enkelt njuta av den vackra omgivningen - det är ditt val hur involverad du vill vara.</p>
                     </div>
                 </div>
 
@@ -607,14 +644,30 @@
         <!-- Footer -->
         <footer>
             <div class="container">
-                <p>© 2024 Wildlife Explorers Tenerife. Alla rättigheter förbehållna.</p>
+                <p>© 2024 Wildlife Explorers Teneriffa. Alla rättigheter förbehållna.</p>
             </div>
         </footer>
         
     </div>
 
     <script>
-        // Automatisk videoavspelning vid hovring
+        // Language Switcher Function
+        document.getElementById('languageSelect').addEventListener('change', function() {
+            const selectedLang = this.value;
+            switch(selectedLang) {
+                case 'en':
+                    window.location.href = 'index.html';
+                    break;
+                case 'sv':
+                    window.location.href = 'sv.html';
+                    break;
+                case 'ru':
+                    window.location.href = 'ru.html';
+                    break;
+            }
+        });
+
+        // Автоматическое воспроизведение видео при наведении
         document.querySelectorAll('.card').forEach(card => {
             const video = card.querySelector('.activity-video');
             
@@ -634,7 +687,7 @@
                 const faqItem = this.parentElement;
                 const answer = this.nextElementSibling;
                 
-                // Stäng alla andra objekt
+                // Close all other items
                 document.querySelectorAll('.faq-item').forEach(item => {
                     if (item !== faqItem) {
                         item.classList.remove('active');
@@ -642,7 +695,7 @@
                     }
                 });
                 
-                // Växla aktuellt objekt
+                // Toggle current item
                 faqItem.classList.toggle('active');
                 answer.classList.toggle('active');
             });
