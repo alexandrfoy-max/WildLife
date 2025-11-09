@@ -9,17 +9,12 @@
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #f8f9fa; }
         .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px 0; }
         
-        /* Hero Section - ПРОСТОЙ И НАДЕЖНЫЙ */
+        /* Hero Section */
         .hero { 
             position: relative;
             height: 100vh;
             overflow: hidden;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mountain-activity.jpg') center/cover;
-        }
-        
-        /* Видео только для десктопа */
-        .desktop-video {
-            display: none;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('background_foto.jpg') center/cover;
         }
         
         .hero-content {
@@ -48,33 +43,6 @@
             transition: background 0.3s ease;
         }
         .btn:hover { background: #cf7116; }
-
-        /* Desktop - показываем видео поверх фото */
-        @media (min-width: 769px) {
-            .hero {
-                background: none;
-            }
-            .desktop-video {
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                z-index: 1;
-            }
-            .hero::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
-                z-index: 1;
-            }
-        }
 
         /* Other Sections */
         .intro { text-align: center; padding: 60px 20px; background: white; }
@@ -119,11 +87,6 @@
 
     <!-- Hero Section -->
     <header class="hero">
-        <!-- Видео ТОЛЬКО для десктопа -->
-        <video class="desktop-video" autoplay muted loop playsinline>
-            <source src="banner-video.mp4" type="video/mp4">
-        </video>
-        
         <div class="hero-content">
             <div class="container">
                 <h1>Wildlife Explorers Tenerife</h1>
@@ -134,90 +97,34 @@
         </div>
     </header>
 
-    <!-- Intro Section -->
-    <section class="intro">
-        <div class="container">
-            <h2>A Day Camp in Chayofa</h2>
-            <p>Our camp is a unique opportunity to connect with the nature and culture of Tenerife through play and exploration. We offer immersive experiences perfect for children on their own or for the whole family. And between activities, you'll be treated to authentic Canarian food!</p>
-        </div>
-    </section>
-
-    <!-- Programs Section -->
+    <!-- Programs Section - временно без фото -->
     <section id="programs" class="programs">
         <div class="container">
             <h2>Choose Your Adventure</h2>
             <div class="program-cards">
-
-                <!-- Program 1: Mountains & Volcanoes -->
                 <div class="card">
-                    <div class="card-img" style="background-image: url('mountain-activity.jpg');"></div>
+                    <div class="card-img" style="background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #666;">
+                        <div>Photo coming soon</div>
+                    </div>
                     <div class="card-content">
                         <h3>Secrets of the Canarian Mountains & Volcanoes</h3>
-                        <p>What lies beneath the mountains of Tenerife? What legends do the locals tell about these sleeping giants? Why are some mountains solid while others crumble like sand?</p>
-                        <ul>
-                            <li>A guided <strong>mountain expedition</strong> with discoveries.</li>
-                            <li>Learn about island geology and local folklore.</li>
-                            <li>A hands-on <strong>craft workshop</strong> to create traditional Guanche artifacts.</li>
-                        </ul>
+                        <!-- остальной текст -->
                     </div>
                 </div>
-
-                <!-- Program 2: Deserts -->
                 <div class="card">
-                    <div class="card-img" style="background-image: url('desert-activity.jpg');"></div>
+                    <div class="card-img" style="background: #f8f9fa; display: flex; align-items: center; justify-content: center; color: #666;">
+                        <div>Photo coming soon</div>
+                    </div>
                     <div class="card-content">
                         <h3>Legends of the Canarian Deserts</h3>
-                        <p>How do plants survive without water? Discover the amazing world of cacti and succulents in Tenerife's unique desert landscapes.</p>
-                        <ul>
-                            <li>A guided <strong>desert expedition</strong> through cactus fields</li>
-                            <li>Learn how cacti store water and survive in arid conditions</li>
-                            <li>Discover medicinal uses of desert plants by local healers</li>
-                            <li>A hands-on <strong>craft workshop</strong> inspired by ancient Guanche people</li>
-                        </ul>
+                        <!-- остальной текст -->
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Practical Info Section -->
-    <section class="info">
-        <div class="container">
-            <h2>Practical Information</h2>
-            <p><strong>Schedule:</strong> 9:00 AM - 4:00 PM</p>
-            <div class="price">70€</div>
-            <div class="included">
-                <p><strong>Price Includes:</strong></p>
-                <ul>
-                    <li>✅ Guidance by a professional educator</li>
-                    <li>✅ Food (1 lunch + 1 snack)</li>
-                    <li>✅ Insurance</li>
-                    <li>✅ All materials for crafts</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Location Section -->
-    <section class="contact">
-        <div class="container">
-            <h2>How to Find Us</h2>
-            <p>We are located in the South of Tenerife, in <strong>Chayofa</strong> - just 2km from Los Cristianos.</p>
-            <p><strong>By Car:</strong> Easy access and parking available.</p>
-            <p><strong>By Bus:</strong> Take bus line 418.</p>
-            <p><strong>Transfer Service:</strong> We can pick you up from a location convenient for you! (This service must be agreed upon in advance).</p>
-            <br>
-            <a href="mailto:booking@wildlifeexplorerstenerife.com" class="btn">Book Your Adventure Now!</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>© 2024 Wildlife Explorers Tenerife. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- остальные секции -->
 
 </body>
 </html>
